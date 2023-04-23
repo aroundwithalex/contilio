@@ -5,7 +5,7 @@ into a SQLite database.
 
 # Running the code
 
-You can run the code by changing your directory to the root level of the project via the `cd` command, and then running `python3 main.py`. Note that before you do this, you should install the requirements via the requirements.txt file via `pip install -r requirements.txt`. This should be done within a virtual environment.
+You can run the code by changing your directory to the root level of the project via the `cd` command, and then running `python3 main.py`. Note that before you do this, you should install the requirements via the requirements.txt file via `pip install -r requirements.txt`. This should be done within a virtual environment. You should also have a `.env` file with relevant API keys in the root directory too.
 
 Alteratively, you can create a virtual environment and install the package within that environment via the `pip install .` command. This should also install all required dependencies, and you should then be able to run `python3 main.py`.
 

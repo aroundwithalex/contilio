@@ -1,6 +1,6 @@
 # Contilio Project
 
-This project represents the completion of a coding challenge set by Contilio. Data is extracted from an [Transporation API](https://developer.transportapi.com/) and loaded
+This project represents the completion of a coding challenge set by Contilio. Data is extracted from an [Transportation API](https://developer.transportapi.com/) and loaded
 into a SQLite database. 
 
 # Running the code

@@ -116,9 +116,9 @@ class QueryDB:
 
         return_value = {}
         if len(data) >= 1:
-            return_value["start_station"] = data[0][0]
-            return_value["end_station"] = data[0][1]
-            return_value["start_time"] = data[0][2]
-            return_value["arrival_time"] = data[0][3]
+            return_value["start_station"] = data[0][1]
+            return_value["end_station"] = data[0][2]
+            return_value["start_time"] = data[0][3]
+            return_value["arrival_time"] = data[0][4]
 
         return return_value

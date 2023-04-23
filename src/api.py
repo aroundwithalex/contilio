@@ -10,6 +10,7 @@ Typical Usage:
     "2022-09-12 00:00:00
 """
 
+import sys
 import requests
 
 
@@ -74,12 +75,17 @@ class TransportAPI:
             "app_key": self.app_key,
         }
 
-        response = requests.get(
-            "https://transportapi.com/v3/uk/places.json?", params=params
-        )
-        latitude = response.json()["member"][0]["latitude"]
-        longtitude = response.json()["member"][0]["longitude"]
-        return {"lat": latitude, "long": longtitude}
+        try:
+            response = requests.get(
+                "https://transportapi.com/v3/uk/places.json?", params=params
+            )
+            latitude = response.json()["member"][0]["latitude"]
+            longtitude = response.json()["member"][0]["longitude"]
+            response.raise_for_status()
+            return {"lat": latitude, "long": longtitude}
+        except requests.exceptions.HTTPError as http_error:
+            print(http_error)
+            sys.exit()
 
     def get_journey_data(self, from_coords, to_coords, start_time):
         """
@@ -105,15 +111,19 @@ class TransportAPI:
         params = {
             "from": f"lonlat:{from_coords['long']},{from_coords['lat']}",
             "to": f"lonlat:{to_coords['long']},{to_coords['lat']}",
-            "date": date[1::],
+            "date": date,
             "time": time,
             "app_key": self.app_key,
             "app_id": self.app_id,
         }
 
-        response = requests.get(
-            f"https://transportapi.com/v3/uk/public_journey.json?",
-            params=params,
-        )
-
-        return response.json()
+        try:
+            response = requests.get(
+                f"https://transportapi.com/v3/uk/public_journey.json?",
+                params=params,
+            )
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.HTTPError as http_error:
+            print(http_error)
+            sys.exit()

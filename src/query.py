@@ -12,10 +12,8 @@ Typical Usage:
     True
 """
 
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, Table, and_
 from sqlalchemy.orm import Session
-from sqlalchemy import Table
-from sqlalchemy import and_
 
 
 class QueryDB:
@@ -29,6 +27,7 @@ class QueryDB:
         self.engine -> Database Engine
         self.metadata -> Metadata object
     """
+
     def __init__(self, engine):
         """
         Constructor for QueryDB
@@ -38,10 +37,10 @@ class QueryDB:
 
         Args:
             engine -> Database engine
-        
+
         Returns:
             None
-        
+
         Raises:
             None
         """
@@ -58,10 +57,10 @@ class QueryDB:
 
         Args:
             station_code -> Station code to look up
-        
+
         Returns:
             Dictionary of returned data
-        
+
         Raises:
             None
         """
@@ -71,9 +70,9 @@ class QueryDB:
                 coords_table.c.station_code.like(station_code)
             )
             result = session.execute(query)
-        
+
         data = result.fetchall()
-        
+
         return_value = {}
         if len(data) >= 1:
             return_value["long"] = data[0][1]
@@ -94,10 +93,10 @@ class QueryDB:
             start_station -> Three letter station code
             end_station -> Three letter end station code
             start_time -> Start time of the journey
-        
+
         Returns:
             Dictionary of data
-        
+
         Raises:
             None
         """
@@ -111,7 +110,7 @@ class QueryDB:
                 )
             )
             result = session.execute(query)
-        
+
         data = result.fetchall()
 
         return_value = {}

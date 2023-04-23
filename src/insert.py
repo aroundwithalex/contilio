@@ -14,9 +14,8 @@ Typical Usage:
 
 from hashlib import md5
 
+from sqlalchemy import MetaData, Table
 from sqlalchemy.dialects.sqlite import insert
-from sqlalchemy import MetaData
-from sqlalchemy import Table
 
 
 class InsertData:
@@ -31,6 +30,7 @@ class InsertData:
         self.coord_table -> Coordinates table
         self.journey_table -> Journey table
     """
+
     def __init__(self, engine):
         """
         Constructor for InsertData
@@ -40,10 +40,10 @@ class InsertData:
 
         Args:
             engine -> Database engine
-        
+
         Returns:
             None
-        
+
         Raises:
             None
         """
@@ -66,10 +66,10 @@ class InsertData:
             code -> Station Code
             long -> Longitude
             lat -> Latitude
-        
+
         Returns:
             True if the insert was successful
-        
+
         Raises:
             None
         """
@@ -77,7 +77,7 @@ class InsertData:
         stmt = stmt.on_conflict_do_nothing(index_elements=["station_code"])
         with self.engine.begin() as conn:
             conn.execute(stmt)
-        
+
         return True
 
     def insert_journey_info(self, start_station, end_station, start_time, arrival_time):
@@ -86,17 +86,17 @@ class InsertData:
 
         This method inserts data into the journeys table. It takes
         a start_station, end_station, start_time and arrival_time and
-        upserts based on a row hash. 
+        upserts based on a row hash.
 
-        Args: 
+        Args:
             start_station -> Start station for journey
             end_station -> End station for journey
             start_time -> Start time of journey
             arrival_time -> Arrival time of journey
-        
+
         Return:
             True
-        
+
         Raises:
             None
         """

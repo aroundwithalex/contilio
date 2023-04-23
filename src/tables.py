@@ -10,12 +10,7 @@ Typical Usage:
     >>> db.create_tables()
 """
 
-from sqlalchemy import create_engine
-from sqlalchemy import MetaData
-from sqlalchemy import Table
-from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
+from sqlalchemy import Column, Integer, MetaData, String, Table, create_engine
 
 
 class Tables:
@@ -29,6 +24,7 @@ class Tables:
         self.engine -> Database engine
         self.metadata -> Metadata object
     """
+
     def __init__(self, db_url):
         """
         Constructor for Tables object
@@ -38,10 +34,10 @@ class Tables:
 
         Args:
             db_url -> Database URL
-        
+
         Returns:
             None
-        
+
         Raises:
             None
         """
@@ -57,10 +53,10 @@ class Tables:
 
         Args:
             None
-        
+
         Returns:
             None
-        
+
         Raises:
             None
         """
@@ -81,12 +77,12 @@ class Tables:
         This method defines the journeys table. It can then be created
         by a later method.
 
-        Args: 
+        Args:
             None
-        
+
         Returns:
             None
-        
+
         Raises:
             None
         """
@@ -112,10 +108,10 @@ class Tables:
 
         Args:
             None
-        
+
         Returns:
             None
-        
+
         Raises:
             None
         """

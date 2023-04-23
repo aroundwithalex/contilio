@@ -1,24 +1,41 @@
-from src.api import TransportAPI
-from src.tables import Tables
-from src.insert import InsertData
-from src.query import QueryDB
-from sqlalchemy import create_engine
+import os
 
 from dateparser import parse
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+
+from src.api import TransportAPI
+from src.insert import InsertData
+from src.query import QueryDB
+from src.tables import Tables
 
 DB_URL = "sqlite:///./trains.db"
 
-def build_database():
-
-    tables = Tables(DB_URL)
-    tables.define_station_coords_table()
-    tables.define_journey_table()
-    tables.create_tables()
-
 def get_journey_data(stations, start_time, max_wait):
+    """
+    Calculates journey times and returns
+
+    This function calcultes journey times and prints the arrival
+    time of a train to the console. If the arrival time is longer
+    than the maximum wait time, an error is raised.
+
+    Args:
+        stations -> Stations to wait at
+        start_time -> Start time of journey
+        max_wait -> Maximum wait time
+    
+    Returns:
+        None
+    
+    Raises:
+        None
+    """
+    load_dotenv()
     engine = create_engine(DB_URL)
 
-    api = TransportAPI("ec2d4066", "ed0a241765e5f6c57b5668779041b319")
+    app_id = os.environ.get("APP_ID")
+    app_key = os.environ.get("APP_KEY")
+    api = TransportAPI(app_id, app_key)
 
     insert_data = InsertData(engine)
     query_data = QueryDB(engine)
